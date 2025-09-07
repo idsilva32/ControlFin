@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meu Gerenciador Financeiro - Início</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #2c3e50, #3498db);
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .container {
+      background: #fff;
+      border-radius: 20px;
+      padding: 40px;
+      width: 100%;
+      max-width: 1000px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    header {
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #2c3e50;
+    }
+
+    .grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* sempre 2 colunas */
+  gap: 20px;
+}
+
+    .card {
+      background: #f8f9fa;
+      padding: 25px;
+      border-radius: 15px;
+      text-align: center;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    }
+
+    .card h2 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      color: #34495e;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: #555;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #888;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #3498db;
+      color: #fff;
+      font-weight: 600;
+      padding: 10px 18px;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: background 0.2s ease;
+      margin-top: 10px;
+    }
+
+    .btn:hover {
+      background: #2980b9;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>💰 Meu Gerenciador Financeiro</h1>
+    </header>
+
+    <section class="grid">
+  <div class="card">
+    <h2>📝 Cadastro de Receitas e Despesas</h2>
+    <a href="CadastroDespesaeReceita.html" class="btn">Entrar</a>
+  </div>
+
+  <div class="card">
+    <h2>📂 Tela de lançamentos</h2>
+    <a href="Resumo.html" class="btn">Entrar</a>
+  </div>
+
+  <div class="card">
+    <h2>📊 Relatórios</h2>
+    <a href="#" class="btn">Abrir</a>
+  </div>
+
+  <div class="card">
+    <h2>⚙️ Configurações</h2>
+    <a href="#" class="btn">Editar</a>
+  </div>
+</section>
+
+
+    <footer>
+      © 2025 - Meu Gerenciador Financeiro
+    </footer>
+  </div>
+</body>
+</html>

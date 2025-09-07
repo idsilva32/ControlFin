@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciador Financeiro - Grid</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container full-width">
+        <header>
+			<h2>
+			<span style="float: left;  font-size: 1rem; color: #6c757d;">Meu Gerenciador Financeiro</span>
+			<span style="float: right; font-size: 1rem; color: #6c757d;">Cadastro de Receita e Despesas.</span>
+			
+			
+			</h2>
+			</header>
+        <main>
+            <section class="table-section" id="tabela-section">
+			<p>
+			<br>
+			</p>
+                <h2></h2>
+                
+                <div class="search-container">
+                    <input type="text" id="search-input" placeholder="Pesquisar por descrição ou origem...">
+                    <button id="search-button" class="btn btn-primary">Pesquisar</button>
+                    <button id="clear-search-button" class="btn btn-secondary">Limpar</button>
+                </div>
+                
+                <div class="table-container">
+                    <table id="financial-table">
+                        <thead>
+                            <tr class="add-row">
+                                <th class="input-cell action-cell"><button id="add-record-btn" class="btn btn-success">Adicionar</button></th>
+                                <th class="input-cell"><input type="text" id="new-nd" placeholder="ND"></th>
+                                <th class="input-cell">
+                                    <select id="new-origem">
+                                        <option value="">Origem...</option>
+                                        <option value="CASA SP">CASA SP</option>
+                                        <option value="EDUCACAO">EDUCACAO</option>
+                                        <option value="CARTÃO DE CRED">CARTÃO DE CRED</option>
+                                        <option value="CASA PRAIA">CASA PRAIA</option>
+                                        <option value="B13-AP26">B13-AP26</option>
+                                        <option value="CARRO">CARRO</option>
+                                        <option value="COMERCIAL ILHA">COMERCIAL ILHA</option>
+                                        <option value="540-GRANDE">540-GRANDE</option>
+                                        <option value="B15-AP35">B15-AP35</option>
+                                        <option value="EMPRESTIMO CINTIA">EMPRESTIMO CINTIA</option>
+                                        <option value="EMPRESA">EMPRESA</option>
+                                        <option value="TRANSFERENCIA">TRANSFERENCIA</option>
+                                        <option value="DIVERSOS">DIVERSOS</option>
+                                        <option value="SALDO MÊS ANTERIOR">SALDO MÊS ANTERIOR</option>
+                                        <option value="OUTROS">OUTROS</option>
+                                        <option value="PROMOTORA">PROMOTORA</option>
+                                        <option value="GAGO">GAGO</option>
+                                    </select>
+                                </th>
+                                <th class="input-cell"><input type="number" id="new-dia" placeholder="Dia"></th>
+                                <th class="input-cell"><input type="text" id="new-descricao" placeholder="Descrição" required></th>
+                                <th class="input-cell">
+                                    <select id="new-formaPagamento">
+                                        <option value="">Pgto...</option>
+                                        <option value="cartao-credito">Cartão de Crédito</option>
+                                        <option value="pix">Pix</option>
+                                        <option value="dinheiro">Dinheiro</option>
+                                        <option value="debito-automatico">Débito Automático</option>
+                                    </select>
+                                </th>
+                                <th class="input-cell">
+                                    <select id="new-mostrar">
+                                        <option value="sim">Sim</option>
+                                        <option value="nao">Não</option>
+                                    </select>
+                                </th>
+                                <th class="input-cell"><input type="text" id="new-instalacao" placeholder="Instalação"></th>
+                                <th class="input-cell"><input type="text" id="new-complemento" placeholder="Complemento"></th>
+                                <th class="input-cell"><input type="text" id="new-observacao" placeholder="Observação"></th>
+                                <th class="input-cell"><input type="date" id="new-dataUltimoPagamento"></th>
+                                <th class="input-cell"><input type="text" id="new-site" placeholder="Site"></th>
+                                <th class="input-cell">
+                                    <select id="new-pago">
+                                        <option value="nao-pago">Não Pago</option>
+                                        <option value="pago">Pago</option>
+                                    </select>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>Ações</th>
+                                <th>ND</th>
+                                <th>Origem</th>
+                                <th>Dia</th>
+                                <th>Descrição</th>
+                                <th>Forma de Pgto</th>
+                                <th>Mostrar</th>
+                                <th>Instalação</th>
+                                <th>Complemento</th>
+                                <th>Observação</th>
+                                <th>Último Pgto</th>
+                                <th>Site</th>
+                                <th>Pago</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+        
+        <div class="actions-section" id="botoes-secao">
+            <label for="importFile" class="btn btn-secondary">Importar JSON</label>
+            <input type="file" id="importFile" accept=".json" style="display: none;">
+            <button id="export-json-btn" class="btn btn-primary">Exportar para JSON</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

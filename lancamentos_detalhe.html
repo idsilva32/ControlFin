@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciador Financeiro - Grid</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container full-width">
+        <header>
+			<h2>
+			<span style="float: left;  font-size: 1rem; color: #6c757d;">Meu Gerenciador Financeiro</span>
+			<span style="float: right; font-size: 1rem; color: #6c757d;">Cadastro de Receita e Despesas.</span>
+			
+			
+			</h2>
+			</header>
+        <main>
+            <section class="table-section" id="tabela-section">
+			<p>
+			<br>
+			</p>
+             <h2></h2>
+            
+            <div class="search-container">
+            <input type="number" id="search-input" placeholder="Pesquisar por ND...">
+            <button id="search-button" class="btn btn-primary">Pesquisar</button>
+            <button id="clear-search-button" class="btn btn-secondary">Limpar</button>
+            </div>    
+			    <div class="table-container">
+                    <table id="financial-table">
+                        <thead>
+                            <tr class="add-row">
+                                <th class="input-cell action-cell"><button id="add-record-btn" class="btn btn-success">Adicionar</button></th>
+                                <th class="input-cell"><input type="number" id="new-nd" placeholder="ND" required></th>
+                
+                                <th class="input-cell"><input type="number" id="new-valor" placeholder="Valor" step="0.01" required></th>
+                                <th class="input-cell"><input type="date" id="new-dtVcto"></th>
+                                <th class="input-cell"><input type="date" id="new-dtPgto"></th>
+                                <th class="input-cell"><input type="text" id="new-localPgto" placeholder="Local Pgto"></th>
+                                <th class="input-cell">
+                                    <select id="new-soma">
+                                        <option value="Sim">Sim</option>
+                                        <option value="Nao">Não</option>
+                                    </select>
+                                </th>
+                                <th class="input-cell"><input type="text" id="new-observacao" placeholder="Observação"></th>
+                            </tr>
+                            <tr>
+                                <th>Ações</th>
+                                <th>ND</th>
+                                <th>Valor</th>
+                                <th>Dt. Vcto</th>
+                                <th>Dt. Pgto</th>
+                                <th>Local Pgto</th>
+                                <th>SOMA?</th>
+                                <th>Observação</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+        
+        <div class="actions-section">
+            <label for="importFile" class="btn btn-secondary">Importar JSON</label>
+            <input type="file" id="importFile" accept=".json" style="display: none;">
+            <button id="export-json-btn" class="btn btn-primary">Exportar para JSON</button>
+        </div>
+    </div>
+
+    <script src="lancamentos_detalhe.js"></script>
+</body>
+</html>

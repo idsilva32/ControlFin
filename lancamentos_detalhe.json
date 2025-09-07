@@ -1,0 +1,42 @@
+[
+  {
+    "ND": 102,
+    "Valor": 600,
+    "Dt_Vcto": "2025-09-05",
+    "Dt_Pgto": "2025-09-05",
+    "Local_Pgto": "Débito Automático Nubank",
+    "SOMA": "Sim",
+    "Observacao": "",
+    "Tipo": "Despesa"
+  },
+  {
+    "ND": 100,
+    "Valor": 1250,
+    "Dt_Vcto": "2025-09-06",
+    "Dt_Pgto": "2025-09-06",
+    "Local_Pgto": "Inter",
+    "SOMA": "Sim",
+    "Observacao": "",
+    "Tipo": "Despesa"
+  },
+  {
+    "Tipo": "Despesa",
+    "ND": 100,
+    "Valor": 52000,
+    "Dt_Vcto": "2025-09-06",
+    "Dt_Pgto": "2025-09-06",
+    "Local_Pgto": "Inter",
+    "SOMA": "Sim",
+    "Observacao": ""
+  },
+  {
+    "Tipo": "Despesa",
+    "ND": 102,
+    "Valor": 30000,
+    "Dt_Vcto": "2025-09-06",
+    "Dt_Pgto": "2025-09-06",
+    "Local_Pgto": "Inter",
+    "SOMA": "Sim",
+    "Observacao": ""
+  }
+]

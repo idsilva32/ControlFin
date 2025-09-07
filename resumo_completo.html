@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciador Financeiro - Resumo Completo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CSS INLINE */
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #6c757d;
+            --success-color: #28a745;
+            --danger-color: #dc3545;
+            --light-bg: #f8f9fa;
+            --dark-bg: #343a40;
+            --text-color: #212529;
+            --border-color: #dee2e6;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: var(--box-shadow);
+            max-width: 1200px;
+            width: 95%;
+            padding: 50px;
+        }
+
+        .container.full-width {
+            max-width: none;
+            width: 100%;
+            padding: 20px 0;
+        }
+
+        /* --- Cabeçalho --- */
+        header h2 {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 20px;
+        }
+
+        /* --- Seções e Pesquisa --- */
+        .search-section {
+            margin-bottom: 20px;
+        }
+
+        .search-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-container input {
+            flex-grow: 1;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid var(--border-color);
+        }
+
+        .table-section {
+            margin-bottom: 40px;
+        }
+
+        .table-section h3 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        /* --- Estilos de Botões --- */
+        .btn {
+            padding: 10px 15px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-size: 1.0rem;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: #fff;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* --- Estilos de Tabela --- */
+        table {
+            width: 100%;
+            min-width: 800px;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+
+        table thead {
+            background-color: var(--dark-bg);
+            color: #fff;
+        }
+
+        table th, table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        table tbody tr:nth-child(even) {
+            background-color: var(--light-bg);
+        }
+
+        table tbody tr:hover {
+            background-color: #e2e6ea;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container full-width">
+        <header>
+            <h2>
+                <span style="float: left;  font-size: 1rem; color: #6c757d;">Meu Gerenciador Financeiro</span>
+                <span style="float: right; font-size: 1rem; color: #6c757d;">Resumo Completo.</span>
+            </h2>
+        </header>
+
+        <main>
+            <section class="search-section">
+                <div class="search-container">
+                    <input type="text" id="search-input" placeholder="Pesquisar por origem ou descrição...">
+                    <button id="search-button" class="btn btn-primary">Pesquisar</button>
+                    <button id="clear-search-button" class="btn btn-secondary">Limpar</button>
+                </div>
+            </section>
+            
+            <section class="table-section">
+                <h3>Resultado (Total)</h3>
+                <div class="table-container">
+                    <table id="resultado-table">
+                        <thead></thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="table-section">
+                <h3>Resumo por Tipo</h3>
+                <div class="table-container">
+                    <table id="tipo-table">
+                        <thead></thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="table-section">
+                <h3>Resumo por Origem</h3>
+                <div class="table-container">
+                    <table id="origem-table">
+                        <thead></thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // --- CÓDIGO JAVASCRIPT INLINE ---
+        const searchInput = document.getElementById('search-input');
+        const searchButton = document.getElementById('search-button');
+        const clearSearchButton = document.getElementById('clear-search-button');
+
+        const resultadoTable = document.getElementById('resultado-table');
+        const tipoTable = document.getElementById('tipo-table');
+        const origemTable = document.getElementById('origem-table');
+
+        let lancamentosOriginais = [];
+        let dadosFinanceirosOriginais = [];
+        let dadosOriginaisProcessados = {};
+
+        function formatarValorBRL(valor) {
+            if (typeof valor !== 'number') return valor;
+            return new Intl.NumberFormat('pt-BR', {
+                style: 'currency',
+                currency: 'BRL'
+            }).format(valor);
+        }
+
+        function processarDados(lancamentos, dadosFinanceiros) {
+            const dadosPorOrigem = {};
+            const dadosPorTipo = { Despesa: { somaPorMesAno: {} }, Receita: { somaPorMesAno: {} } };
+            const dadosResultado = { Resultado: { somaPorMesAno: {} } };
+            
+            const mapaDados = {};
+            dadosFinanceiros.forEach(item => {
+                mapaDados[item.Origem] = item;
+            });
+
+            lancamentos.forEach(lancamento => {
+                const nd = lancamento.ND;
+                const valor = parseFloat(lancamento.Valor);
+                const mesAno = lancamento.Dt_Vcto ? `${lancamento.Dt_Vcto.substring(5, 7)}/${lancamento.Dt_Vcto.substring(0, 4)}` : 'Sem Data';
+
+                if (isNaN(valor) || lancamento.SOMA === 'Nao') return;
+
+                const dadosND = dadosFinanceiros.find(d => d.ND === nd);
+                if (!dadosND || !dadosND.Origem) return;
+
+                const origem = dadosND.Origem;
+
+                if (!dadosPorOrigem[origem]) {
+                    dadosPorOrigem[origem] = { somaPorMesAno: {} };
+                }
+                if (!dadosPorOrigem[origem].somaPorMesAno[mesAno]) {
+                    dadosPorOrigem[origem].somaPorMesAno[mesAno] = 0;
+                }
+                dadosPorOrigem[origem].somaPorMesAno[mesAno] += valor;
+
+                const tipo = valor > 0 ? 'Despesa' : 'Receita';
+                if (!dadosPorTipo[tipo].somaPorMesAno[mesAno]) {
+                    dadosPorTipo[tipo].somaPorMesAno[mesAno] = 0;
+                }
+                dadosPorTipo[tipo].somaPorMesAno[mesAno] += valor;
+
+                if (!dadosResultado.Resultado.somaPorMesAno[mesAno]) {
+                    dadosResultado.Resultado.somaPorMesAno[mesAno] = 0;
+                }
+                dadosResultado.Resultado.somaPorMesAno[mesAno] += valor;
+            });
+
+            return { dadosPorOrigem, dadosPorTipo, dadosResultado };
+        }
+
+        function renderizarTabela(elementId, dadosAgrupados, colunaChave) {
+            const tabelaHead = document.querySelector(`#${elementId} thead tr`);
+            const tabelaBody = document.querySelector(`#${elementId} tbody`);
+            
+            if (!tabelaHead || !tabelaBody) return;
+
+            const chaves = Object.keys(dadosAgrupados).sort();
+            
+            const mesesAnos = new Set();
+            Object.values(dadosAgrupados).forEach(chaveData => {
+                Object.keys(chaveData.somaPorMesAno).forEach(mesAno => mesesAnos.add(mesAno));
+            });
+
+            const mesesAnosOrdenados = Array.from(mesesAnos).sort((a, b) => {
+                const [mesA, anoA] = a.split('/').map(Number);
+                const [mesB, anoB] = b.split('/').map(Number);
+                if (anoA !== anoB) {
+                    return anoB - anoA;
+                }
+                return mesB - mesA;
+            });
+
+            tabelaHead.innerHTML = `
+                <th>${colunaChave}</th>
+                ${mesesAnosOrdenados.map(mesAno => `<th>Total ${mesAno}</th>`).join('')}
+            `;
+
+            tabelaBody.innerHTML = '';
+            chaves.forEach(chave => {
+                const chaveData = dadosAgrupados[chave];
+                const linha = document.createElement('tr');
+                
+                let valoresMensaisHTML = '';
+                mesesAnosOrdenados.forEach(mesAno => {
+                    const valor = chaveData.somaPorMesAno[mesAno] || 0;
+                    valoresMensaisHTML += `<td>${formatarValorBRL(valor)}</td>`;
+                });
+
+                linha.innerHTML = `
+                    <td>${chave || ''}</td>
+                    ${valoresMensaisHTML}
+                `;
+                tabelaBody.appendChild(linha);
+            });
+        }
+
+        function renderizarTodosRelatorios(dadosParaRenderizar) {
+            renderizarTabela('resultado-table', dadosParaRenderizar.dadosResultado, 'Resultado');
+            renderizarTabela('tipo-table', dadosParaRenderizar.dadosPorTipo, 'Tipo');
+            renderizarTabela('origem-table', dadosParaRenderizar.dadosPorOrigem, 'Origem');
+        }
+
+        function filtrarRelatorios() {
+            const termo = searchInput.value.toLowerCase();
+            
+            if (!termo) {
+                renderizarTodosRelatorios(dadosOriginaisProcessados);
+                return;
+            }
+
+            const lancamentosFiltrados = lancamentosOriginais.filter(lancamento => {
+                const dadosND = dadosFinanceirosOriginais.find(d => d.ND === lancamento.ND);
+                if (!dadosND) return false;
+
+                const origem = dadosND.Origem ? dadosND.Origem.toLowerCase() : '';
+                const descricao = dadosND.Descrição ? dadosND.Descrição.toLowerCase() : '';
+
+                return origem.includes(termo) || descricao.includes(termo);
+            });
+            
+            const dadosFiltradosProcessados = processarDados(lancamentosFiltrados, dadosFinanceirosOriginais);
+            renderizarTodosRelatorios(dadosFiltradosProcessados);
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            const lancamentosSalvos = localStorage.getItem('lancamentosDetalhe');
+            lancamentosOriginais = lancamentosSalvos ? JSON.parse(lancamentosSalvos) : [];
+            
+            try {
+                const response = await fetch('dados_financeiros.json');
+                if (response.ok) {
+                    dadosFinanceirosOriginais = await response.json();
+                }
+            } catch (e) {
+                console.error('Erro ao carregar dados_financeiros.json:', e);
+            }
+
+            dadosOriginaisProcessados = processarDados(lancamentosOriginais, dadosFinanceirosOriginais);
+            renderizarTodosRelatorios(dadosOriginaisProcessados);
+
+            searchButton.addEventListener('click', filtrarRelatorios);
+            clearSearchButton.addEventListener('click', () => {
+                searchInput.value = '';
+                renderizarTodosRelatorios(dadosOriginaisProcessados);
+            });
+        });
+    </script>
+</body>
+</html>
